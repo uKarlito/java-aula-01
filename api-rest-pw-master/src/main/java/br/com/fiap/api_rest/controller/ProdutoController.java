@@ -1,7 +1,9 @@
 package br.com.fiap.api_rest.controller;
 
+import br.com.fiap.api_rest.dto.ProdutoRequest;
 import br.com.fiap.api_rest.model.Produto;
 import br.com.fiap.api_rest.service.ProdutoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,7 @@ public class ProdutoController {
     // API  - POST,   GET,  PUT,    DELETE
 
     @PostMapping
-    public ResponseEntity<Produto> createProduto(@RequestBody Produto produto){
+    public ResponseEntity<Produto> createProduto(@Valid @RequestBody ProdutoRequest produto){
         Produto produtoSalvo = produtoService.create(produto);
         return new ResponseEntity<>(produtoSalvo, HttpStatus.CREATED);
     }
