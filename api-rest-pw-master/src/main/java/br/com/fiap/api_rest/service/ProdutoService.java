@@ -1,49 +1,31 @@
 package br.com.fiap.api_rest.service;
 
-import br.com.fiap.api_rest.dto.ProdutoRequest;
-import br.com.fiap.api_rest.mapper.ProdutoMapper;
 import br.com.fiap.api_rest.model.Produto;
 import br.com.fiap.api_rest.repository.ProdutoRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Nodes.collect;
 
 @Service
 public class ProdutoService {
-    private final ProdutoRepository produtoRepository;
-    private final ProdutoMapper produtoMapper;
-
     @Autowired
-    public ProdutoService(ProdutoRepository produtoRepository, ProdutoMapper produtoMapper) {
-        this.produtoRepository = produtoRepository;
-        this.produtoMapper = produtoMapper;
-    }
+    private ProdutoRepository produtoRepository;
 
     // CRUD
-    public Produto create(ProdutoRequest produtoRequest) {
-        Produto produto = new Produto();
-        BeanUtils.copyProperties(produtoRequest, produto);
+    public Produto create(Produto produto) {
         return produtoRepository.save(produto);
     }
 
-    public ProdutoResponse read(UUID id) {
+    public Produto read(UUID id) {
         Optional<Produto> produto =  produtoRepository.findById(id);
-        if (produto.isEmpty()) {
-            return null;
-        }
-        return produto.produtoMapper.produtoToResponse(produto.get));
+        return produto.orElse(null);
     }
 
-    public List<ProdutoResponse> read() {
-        List<Produto> produtos = produtoRepository.findAll();
-        return produtos.stream().map(produtoMapper::produtoToResponse).collect(Collectors.toList());
+    public List<Produto> read() {
+        return produtoRepository.findAll();
     }
 
     public Produto update(Produto produto) {
