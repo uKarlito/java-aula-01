@@ -57,6 +57,7 @@ public class ProdutoController {
     // HATEOAS
     // PageAnterior: localhost:8080/produtos?pageNumber=0
     // PageSeguinte: null
+<<<<<<< HEAD
     @Operation(summary = "Busca produtos por páginas")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
@@ -69,6 +70,8 @@ public class ProdutoController {
                     content = @Content(schema = @Schema())
             )
     })
+=======
+>>>>>>> 352fdc0074414096001ac728d61e56c640e6e87a
     @GetMapping
     public ResponseEntity<Page<ProdutoLista>> readProduto(@RequestParam(defaultValue = "0") Integer pageNumber) {
         // page number, page size, sort

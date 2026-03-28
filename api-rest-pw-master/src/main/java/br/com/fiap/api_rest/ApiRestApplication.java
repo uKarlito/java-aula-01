@@ -17,9 +17,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 public class ApiRestApplication {
 
+<<<<<<< HEAD
     public static void main(String[] args) {
 
         SpringApplication.run(ApiRestApplication.class, args);
     }
+=======
+	public static void main(String[] args) {
+
+		SpringApplication.run(ApiRestApplication.class, args);
+	}
+>>>>>>> 352fdc0074414096001ac728d61e56c640e6e87a
 
 }
