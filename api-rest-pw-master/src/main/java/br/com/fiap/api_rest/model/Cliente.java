@@ -1,18 +1,38 @@
 package br.com.fiap.api_rest.model;
 
-import java.time.LocalDate;
+import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.util.UUID;
+
+@Entity
+@Table(name = "TB_CLIENTES")
 public class Cliente {
 
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
+    private UUID id;
+
+    @Column(name = "nome")
     private String nome;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "cpf")
     private String cpf;
+
+    @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
+
+    @Column(name = "telefone")
     private String telefone;
 
-    public Cliente(Long id, String nome, String email, String cpf, LocalDate dataNascimento, String telefone) {
-        this.id = id;
+    public Cliente() {
+    }
+
+    public Cliente(String nome, String email, String cpf, LocalDate dataNascimento, String telefone) {
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
@@ -20,12 +40,20 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getNome() {
         return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEmail() {
