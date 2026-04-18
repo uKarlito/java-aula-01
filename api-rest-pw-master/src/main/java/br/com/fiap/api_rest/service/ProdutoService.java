@@ -12,10 +12,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
+
 
 @Service
 public class ProdutoService {
@@ -28,7 +28,6 @@ public class ProdutoService {
         this.produtoMapper = produtoMapper;
     }
 
-    // CRUD
     public Produto create(ProdutoRequest produtoRequest) {
         Produto produto = new Produto();
         BeanUtils.copyProperties(produtoRequest, produto);
@@ -43,24 +42,11 @@ public class ProdutoService {
         return produtoMapper.produtoToResponse(produto.get());
     }
 
-    // Page, Pageable
     public Page<ProdutoLista> read(Pageable pageable) {
         return produtoRepository
                 .findAll(pageable)
-                .map(produtoMapper::produtoToProdutoista);
+                .map(produtoMapper::produtoToProdutoLista);
     }
-
-    /*
-    // Exemplo usando for em vez de stream
-    public List<ProdutoResponse> read() {
-        List<Produto> produtos = produtoRepository.findAll();
-        List<ProdutoResponse> produtosResponse = new ArrayList<>();
-        for (Produto produto : produtos) {
-            produtosResponse.add(produtoMapper.produtoToResponse(produto));
-        }
-        return produtosResponse;
-    }
-     */
 
     public Produto update(Produto produto) {
         return produtoRepository.save(produto);

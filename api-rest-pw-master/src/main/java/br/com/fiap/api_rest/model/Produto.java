@@ -7,17 +7,21 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Table(name = "TB_PRODUTOS")
+@Table(name = "tb_produtos")
 public class Produto {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.UUID, generator = "tb_produtos_seq")
+    @Column(name = "id_produto")
     private UUID id;
-    @Column(name = "nome_produto")
+
+    @Column(name = "nm_produto")
     private String nome;
+
     @Column(name = "preco_produto")
     private BigDecimal preco;
-    @Column(name = "data_validade")
+
+    @Column(name = "expiracao_produto")
     private LocalDate expiracao;
 
     public Produto() {
