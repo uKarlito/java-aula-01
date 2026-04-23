@@ -12,20 +12,22 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+
 import java.util.Optional;
 import java.util.UUID;
+
 
 @Service
 public class ProdutoService {
     private final ProdutoRepository produtoRepository;
-    private final ProdutoMapper mapper;
+    private final ProdutoMapper produtoMapper;
 
     @Autowired
     public ProdutoService(ProdutoRepository produtoRepository, ProdutoMapper produtoMapper) {
         this.produtoRepository = produtoRepository;
-        this.mapper = produtoMapper;
+        this.produtoMapper = produtoMapper;
     }
-    // CRUD
+
     public Produto create(ProdutoRequest produtoRequest) {
         Produto produto = new Produto();
         BeanUtils.copyProperties(produtoRequest, produto);
@@ -34,17 +36,16 @@ public class ProdutoService {
 
     public ProdutoResponse read(UUID id) {
         Optional<Produto> produto =  produtoRepository.findById(id);
-        if (produto.isEmpty()){
+        if (produto.isEmpty()) {
             return null;
         }
-        return mapper.produtoToResponse(produto.get());
+        return produtoMapper.produtoToResponse(produto.get());
     }
 
-    // Page, Pageable
     public Page<ProdutoLista> read(Pageable pageable) {
         return produtoRepository
                 .findAll(pageable)
-                .map(mapper::produtoToProdutoLista);
+                .map(produtoMapper::produtoToProdutoLista);
     }
 
     public Produto update(Produto produto) {
