@@ -2,19 +2,18 @@ package br.com.fiap.api_rest.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "TD_PEDIDOS")
 public class Pedido {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private StatusPedido status;
     private LocalDateTime data;
-    private double valor;
+    private Double valor;
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
@@ -48,11 +47,11 @@ public class Pedido {
         this.data = data;
     }
 
-    public double getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 
@@ -71,5 +70,4 @@ public class Pedido {
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }
-
 }

@@ -9,14 +9,10 @@ import java.util.List;
 public class Cliente {
     @Id
     private String cpf;
-
     private String nome;
-
     private String email;
-
     private LocalDate dataNascimento;
-
-    private String Telefone;
+    private String telefone;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_endereco")
     private Endereco endereco;
@@ -56,11 +52,11 @@ public class Cliente {
     }
 
     public String getTelefone() {
-        return Telefone;
+        return telefone;
     }
 
     public void setTelefone(String telefone) {
-        Telefone = telefone;
+        this.telefone = telefone;
     }
 
     public Endereco getEndereco() {
@@ -69,5 +65,13 @@ public class Cliente {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 }

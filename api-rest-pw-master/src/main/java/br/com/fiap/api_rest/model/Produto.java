@@ -8,37 +8,22 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tb_produtos")
+@Table(name = "TB_PRODUTOS")
 public class Produto {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID, generator = "tb_produtos_seq")
-    @Column(name = "id_produto")
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
     private UUID id;
-
-    @Column(name = "nm_produto")
+    @Column(name = "nome_produto")
     private String nome;
-
     @Column(name = "preco_produto")
     private BigDecimal preco;
-
-    @Column(name = "expiracao_produto")
+    @Column(name = "data_validade")
     private LocalDate expiracao;
     private Categoria categoria;
     private int estoque;
     @ManyToMany(mappedBy = "produtos")
     private List<Pedido> pedidos;
-
-    public Produto() {
-    }
-
-    public Produto(String nome, BigDecimal preco, LocalDate expiracao, Categoria categoria, int estoque) {
-        this.nome = nome;
-        this.preco = preco;
-        this.expiracao = expiracao;
-        this.categoria = categoria;
-        this.estoque = estoque;
-    }
 
     public UUID getId() {
         return id;
@@ -76,16 +61,16 @@ public class Produto {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
     public int getEstoque() {
         return estoque;
     }
 
     public void setEstoque(int estoque) {
         this.estoque = estoque;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public List<Pedido> getPedidos() {
